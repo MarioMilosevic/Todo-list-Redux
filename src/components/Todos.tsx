@@ -1,12 +1,37 @@
 import Todo from "./Todo";
 import type { RootState } from "../store/store";
-import { addText } from "../features/todo/todoSlice";
-import { useSelector,useDispatch } from "react-redux";
-import { addTodo } from "../features/todos/todosSlice";
+import { TodoItem } from "../features/todo/todoSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { addTodo, toggleIsFinished } from "../features/todos/todosSlice";
+import { useState } from "react";
 
-const Home = () => {
-  const todos = useSelector((state: RootState) => state.todos)
-  const dispatch = useDispatch()
+const Todos = () => {
+  const { todos } = useSelector((state: RootState) => state.todos);
+  const dispatch = useDispatch();
+
+
+
+  const initialTodoState = {
+    id: crypto.randomUUID(),
+    text: "",
+    finished: false,
+  };
+
+  const [todo, setTodo] = useState<TodoItem>(initialTodoState);
+
+  const addTodoHandler = (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    e.preventDefault();
+    dispatch(addTodo(todo));
+    setTodo(initialTodoState);
+  };
+
+
+  const toggleFinished = (id:string) => {
+    dispatch(toggleIsFinished(id))
+  }
+
   return (
     <>
       <form className="w-[500px] mx-auto pt-8 pb-12 bg-blue-200 rounded-lg flex flex-col items-center gap-2">
@@ -16,17 +41,24 @@ const Home = () => {
             type="text"
             placeholder="Add todo"
             className="w-[70%] rounded-full pl-4 py-2 outline-none"
-            onChange={(e) => dispatch(addText(e.target.value))}
+            value={todo.text}
+            onChange={(e) =>
+              setTodo((prev) => ({ ...prev, text: e.target.value }))
+            }
           />
-          <button className="w-[30%] bg-blue-400 text-blue-100 rounded-full"
-          onClick={() => dispatch(addTodo(todo))}>
+          <button
+            className="w-[30%] bg-blue-400 text-blue-100 rounded-full"
+            onClick={(e) => addTodoHandler(e)}
+          >
             Add todo
           </button>
         </div>
-       
+        {todos.map((el) => (
+          <Todo key={el.id} {...el} toggleFinished={toggleFinished } />
+        ))}
       </form>
     </>
   );
-}
+};
 
-export default Home
+export default Todos;
