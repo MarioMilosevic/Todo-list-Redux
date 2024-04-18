@@ -1,9 +1,10 @@
 import Todos from "./components/Todos";
-
+import Counter from "./components/Counter";
 function App() {
   return (
     <>
-      <Todos/>
+      <Todos />
+      <Counter/>
     </>
   );
 }
