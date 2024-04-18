@@ -15,17 +15,21 @@ const Counter = () => {
       <span className="pb-4 text-xl">{count}</span>
       <div className="flex gap-4">
         <button
-                  className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
-                  onClick={() => dispatch(increment())}
+          className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
+          onClick={() => dispatch(increment())}
         >
           Increment
         </button>
-              <button className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
-              onClick={() => dispatch(decrement())}>
+        <button
+          className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
+          onClick={() => dispatch(decrement())}
+        >
           Decrement
         </button>
-              <button className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
-              onClick={() => dispatch(incrementByAmount(5))}>
+        <button
+          className="bg-blue-500 rounded-full p-2 hover:bg-blue-600"
+          onClick={() => dispatch(incrementByAmount(5))}
+        >
           Increment by 5
         </button>
       </div>
