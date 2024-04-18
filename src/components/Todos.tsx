@@ -1,15 +1,13 @@
 import Todo from "./Todo";
 import type { RootState } from "../store/store";
-import { TodoItem } from "../features/todo/todoSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { addTodo, toggleIsFinished } from "../features/todos/todosSlice";
 import { useState } from "react";
+import { TodoItem } from "../features/todos/todosSlice";
 
 const Todos = () => {
   const { todos } = useSelector((state: RootState) => state.todos);
   const dispatch = useDispatch();
-
-
 
   const initialTodoState = {
     id: crypto.randomUUID(),
@@ -27,10 +25,9 @@ const Todos = () => {
     setTodo(initialTodoState);
   };
 
-
-  const toggleFinished = (id:string) => {
-    dispatch(toggleIsFinished(id))
-  }
+  const toggleFinished = (id: string) => {
+    dispatch(toggleIsFinished(id));
+  };
 
   return (
     <>
@@ -54,7 +51,7 @@ const Todos = () => {
           </button>
         </div>
         {todos.map((el) => (
-          <Todo key={el.id} {...el} toggleFinished={toggleFinished } />
+          <Todo key={el.id} {...el} toggleFinished={toggleFinished} />
         ))}
       </form>
     </>

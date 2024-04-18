@@ -17,7 +17,6 @@ const Todo = ({ id, text, toggleFinished, finished }: TodoProps) => {
     e.preventDefault();
     dispatch(deleteTodo(id));
   };
-console.log(finished)
   return (
     <article className="flex w-[80%] justify-between">
       <div className="flex gap-2">
