@@ -1,7 +1,7 @@
 import Todo from "./Todo";
 import type { RootState } from "../store/store";
 import { useSelector, useDispatch } from "react-redux";
-import { addTodo, toggleIsFinished } from "../features/todos/todosSlice";
+import { addTodo} from "../features/todos/todosSlice";
 import { useState } from "react";
 import { TodoItem } from "../features/todos/todosSlice";
 
@@ -25,9 +25,6 @@ const Todos = () => {
     setTodo(initialTodoState);
   };
 
-  const toggleFinished = (id: string) => {
-    dispatch(toggleIsFinished(id));
-  };
 
   return (
     <>
@@ -51,7 +48,7 @@ const Todos = () => {
           </button>
         </div>
         {todos.map((el) => (
-          <Todo key={el.id} {...el} toggleFinished={toggleFinished} />
+          <Todo key={el.id} {...el}/>
         ))}
       </form>
     </>

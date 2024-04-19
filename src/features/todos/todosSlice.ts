@@ -14,7 +14,6 @@ export interface TodosState {
 const initialState: TodosState = {
   todos: [],
 };
-
 export const todosSlice = createSlice({
   name: "todos",
   initialState,
@@ -26,11 +25,7 @@ export const todosSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== action.payload);
     },
     toggleIsFinished: (state, action: PayloadAction<string>) => {
-      const todoId = action.payload;
-      const todoIndex = state.todos.findIndex((todo) => todo.id === todoId);
-      if (todoIndex !== -1) {
-        state.todos[todoIndex].finished = !state.todos[todoIndex].finished;
-      }
+      state.todos = state.todos.map(todo => action.payload === todo.id ? { ...todo, finished: !todo.finished } : todo)
     },
   },
 });

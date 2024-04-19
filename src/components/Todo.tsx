@@ -1,14 +1,13 @@
 import { useDispatch } from "react-redux";
-import { deleteTodo } from "../features/todos/todosSlice";
+import { deleteTodo, toggleIsFinished } from "../features/todos/todosSlice";
 
 type TodoProps = {
   id: string;
   text: string;
   finished: boolean;
-  toggleFinished: (id: string) => void;
 };
 
-const Todo = ({ id, text, toggleFinished, finished }: TodoProps) => {
+const Todo = ({ id, text, finished }: TodoProps) => {
   const dispatch = useDispatch();
 
   const deleteTodoHandler = (
@@ -17,13 +16,14 @@ const Todo = ({ id, text, toggleFinished, finished }: TodoProps) => {
     e.preventDefault();
     dispatch(deleteTodo(id));
   };
+
   return (
     <article className="flex w-[80%] justify-between">
       <div className="flex gap-2">
         <input
           type="checkbox"
           checked={finished}
-          onChange={() => toggleFinished(id)}
+          onChange={() => dispatch(toggleIsFinished(id))}
         />
         <p>{text}</p>
       </div>
